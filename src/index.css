@@ -1,0 +1,29 @@
+body {
+  font-family:Roboto, sans-serif;
+  background:#fff;
+}
+
+.play-area {
+  width: 50%;
+}
+
+.wrong-text {
+  background: red;
+}
+
+.type-text {
+  flex: 1;
+  white-space: pre;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: #333;
+  margin-bottom: 1em;
+  min-height: 1em;
+  color: #fff;
+}
+
+.type-box {
+  background: #333;
+  min-height: 6em;
+  color: #fff;
+}

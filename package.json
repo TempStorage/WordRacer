@@ -1,0 +1,18 @@
+{
+  "name": "typeracer-clientside-test",
+  "description": "Todo:\nOpitimize array usage (gets laggy on 2000+ characters, current sample is about 200)",
+  "version": "0.0.44",
+  "dependencies": {
+    "react-dom": "16.0.0",
+    "react": "16.0.0"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
