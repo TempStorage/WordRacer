@@ -26,6 +26,9 @@ function Stats(props) {
       <span className="words-per-minute">
         Your WPM: {props.WordsPerMinute}
       </span>
+      <span className="wrong-letters">
+        Wrong letters: {props.WrongLetters}
+      </span>
     </div>
   )
 }
@@ -41,6 +44,7 @@ class PlayArea extends React.Component {
         AllText: new Array(arrLen),
         StartDate: 0,
         WordsPerMinute: 0,
+        WrongLetters: 0
       }
     }
   }
@@ -62,7 +66,8 @@ class PlayArea extends React.Component {
 
   RenderStats() {
     return (
-      <Stats WordsPerMinute={this.state.PlayArea.WordsPerMinute} />
+      <Stats WordsPerMinute={this.state.PlayArea.WordsPerMinute}
+        WrongLetters={this.state.PlayArea.WrongLetters} />
     )
   }
 
@@ -92,6 +97,7 @@ class PlayArea extends React.Component {
         } else {
           PlayArea.WrongText += event.key
           PlayArea.AllText.push(<span class="wrong-text">{event.key}</span>)
+          PlayArea.WrongLetters += 1;
         }
       }
       PlayArea.WordsPerMinute = Math.round((PlayArea.DoneText.split(" ")
