@@ -20,6 +20,16 @@ function TypeBox(props) {
   );
 }
 
+function Stats(props) {
+  return (
+    <div className="stats">
+      <span className="words-per-minute">
+      Your WPM: {props.WordsPerMinute}
+      </span>
+    </div>
+  )
+}
+
 class PlayArea extends React.Component {
   constructor(props) {
     super(props);
@@ -29,7 +39,8 @@ class PlayArea extends React.Component {
         WrongText: "",
         TodoText: "Coffee is a brewed drink prepared from roasted coffee beans, which are the seeds of berries from the Coffea plant. The genus Coffea is native to tropical Africa (specifically having its origin in Ethiopia and Sudan) and Madagascar, the Comoros, Mauritius, and Reunion in the Indian Ocean.",
         AllText: new Array(arrLen),
-        indexLen: 0
+        StartDate: 0,
+        WordsPerMinute: 0,
       }
     }
   }
@@ -49,10 +60,23 @@ class PlayArea extends React.Component {
     )
   }
 
+  RenderStats() {
+    return (
+      <Stats WordsPerMinute={this.state.PlayArea.WordsPerMinute}/>
+    )
+  }
 
   handleKeyPress = (event) => {
     console.log(event.key)
     var PlayArea = {...this.state.PlayArea}
+    
+    if (PlayArea.StartDate === 0) {
+      PlayArea.StartDate = new Date();
+      console.log(PlayArea.StartDate)
+    }
+
+    console.log(PlayArea.StartDate)
+    console.log(PlayArea.WordsPerMinute)
     if (!(PlayArea.TodoText.length === 0)) {
       if (event.key === "Backspace") {
         if (!(PlayArea.WrongText.length === 0)) {
@@ -71,9 +95,9 @@ class PlayArea extends React.Component {
           PlayArea.AllText.push(<span class="wrong-text">{event.key}</span>)
         }
       }
-      console.log(PlayArea)
-      this.setState({ PlayArea: PlayArea })
-    }
+      PlayArea.WordsPerMinute = Math.round((PlayArea.DoneText.split(" ").length - 1) / ((new Date() - PlayArea.StartDate) / 1000 / 60))
+    } 
+    this.setState({ PlayArea: PlayArea })
   }
 
   render() {
@@ -83,6 +107,7 @@ class PlayArea extends React.Component {
     This is what you have written:
     {this.RenderTypeText()}
     Make sure this is in focus before typing!
+    {this.RenderStats()}
     </div>)
   }
 }
