@@ -28,3 +28,7 @@ body {
   min-height: 6em;
   color: #fff;
 }
+
+.stats {
+  display: block;
+}

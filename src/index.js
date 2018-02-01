@@ -23,12 +23,12 @@ function TypeBox(props) {
 function Stats(props) {
   return (
     <div className="stats">
-      <span className="words-per-minute">
+      <div className="words-per-minute">
         Your WPM: {props.WordsPerMinute}
-      </span>
-      <span className="wrong-letters">
+      </div>
+      <div className="wrong-letters">
         Wrong letters: {props.WrongLetters}
-      </span>
+      </div>
     </div>
   )
 }
