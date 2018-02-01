@@ -24,7 +24,7 @@ function Stats(props) {
   return (
     <div className="stats">
       <span className="words-per-minute">
-      Your WPM: {props.WordsPerMinute}
+        Your WPM: {props.WordsPerMinute}
       </span>
     </div>
   )
@@ -48,35 +48,34 @@ class PlayArea extends React.Component {
 
   RenderTypeBox() {
     return (
-      <TypeBox WrongText={this.state.PlayArea.WrongText} 
-        DoneText={this.state.PlayArea.DoneText} 
-        TodoText={this.state.PlayArea.TodoText}/>
+      <TypeBox WrongText={this.state.PlayArea.WrongText}
+        DoneText={this.state.PlayArea.DoneText}
+        TodoText={this.state.PlayArea.TodoText} />
     )
   }
 
   RenderTypeText() {
     return (
-      <TypeText AllText={this.state.PlayArea.AllText}/>
+      <TypeText AllText={this.state.PlayArea.AllText} />
     )
   }
 
   RenderStats() {
     return (
-      <Stats WordsPerMinute={this.state.PlayArea.WordsPerMinute}/>
+      <Stats WordsPerMinute={this.state.PlayArea.WordsPerMinute} />
     )
   }
 
   handleKeyPress = (event) => {
-    console.log(event.key)
-    var PlayArea = {...this.state.PlayArea}
-    
+    var PlayArea = {
+      ...this.state.PlayArea
+    }
+
     if (PlayArea.StartDate === 0) {
       PlayArea.StartDate = new Date();
       console.log(PlayArea.StartDate)
     }
 
-    console.log(PlayArea.StartDate)
-    console.log(PlayArea.WordsPerMinute)
     if (!(PlayArea.TodoText.length === 0)) {
       if (event.key === "Backspace") {
         if (!(PlayArea.WrongText.length === 0)) {
@@ -95,24 +94,26 @@ class PlayArea extends React.Component {
           PlayArea.AllText.push(<span class="wrong-text">{event.key}</span>)
         }
       }
-      PlayArea.WordsPerMinute = Math.round((PlayArea.DoneText.split(" ").length - 1) / ((new Date() - PlayArea.StartDate) / 1000 / 60))
-    } 
-    this.setState({ PlayArea: PlayArea })
+      PlayArea.WordsPerMinute = Math.round((PlayArea.DoneText.split(" ")
+        .length - 1) / ((new Date() - PlayArea.StartDate) / 1000 / 60))
+    }
+    this.setState({
+      PlayArea: PlayArea
+    })
   }
 
   render() {
     return (<div class="play-area" autoFocus tabIndex="0" onKeyDown={this.handleKeyPress}>
-    Type this:
+      Type this:
     {this.RenderTypeBox()}
-    This is what you have written:
+      This is what you have written:
     {this.RenderTypeText()}
-    Make sure this is in focus before typing!
+      Make sure this is in focus before typing!
     {this.RenderStats()}
     </div>)
   }
 }
 
 ReactDOM.render(
-  <PlayArea />,
-  document.getElementById('root')
+  <PlayArea />, document.getElementById('root')
 );
